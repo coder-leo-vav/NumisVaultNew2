@@ -1,6 +1,6 @@
 -- Create the numisvault database tables
 
--- Countries table
+-- Countries table (уже правильно - есть UNIQUE на name)
 CREATE TABLE IF NOT EXISTS countries (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
@@ -10,28 +10,29 @@ CREATE TABLE IF NOT EXISTS countries (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Denominations table
+-- Denominations table (добавлено составное уникальное ограничение)
 CREATE TABLE IF NOT EXISTS denominations (
     id SERIAL PRIMARY KEY,
     value VARCHAR(50) NOT NULL,
     currency VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(value, currency)  -- ← ДОБАВЛЕНО
 );
 
--- Materials table
+-- Materials table (добавлено UNIQUE на name)
 CREATE TABLE IF NOT EXISTS materials (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,  -- ← ДОБАВЛЕНО UNIQUE
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Conditions table
+-- Conditions table (добавлено UNIQUE на name)
 CREATE TABLE IF NOT EXISTS conditions (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,  -- ← ДОБАВЛЕНО UNIQUE
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS collections (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    owner_id INTEGER, -- Could reference a users table if implemented
+    owner_id INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS collection_coins (
     UNIQUE(collection_id, coin_id)
 );
 
--- Users table (for authentication if needed)
+-- Users table
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
@@ -115,7 +116,7 @@ INSERT INTO countries (name, code, continent) VALUES
 ('Brazil', 'BR', 'South America')
 ON CONFLICT (name) DO NOTHING;
 
--- Insert default denominations
+-- Insert default denominations (теперь работает благодаря уникальному ограничению)
 INSERT INTO denominations (value, currency) VALUES
 ('1 Cent', 'USD'),
 ('5 Cents', 'USD'),

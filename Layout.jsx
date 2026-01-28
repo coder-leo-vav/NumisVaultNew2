@@ -21,6 +21,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import './index.css'
 
 const navigation = [
   { name: 'Обзор', href: 'Dashboard', icon: LayoutDashboard },
