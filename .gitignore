@@ -2,39 +2,33 @@
 # Dependencies
 node_modules/
 
-# Logs
-*.log
+# Build artifacts
+dist/
+build/
+*.js.map
 
-# Environment variables
+# Environment
 .env
 .env.local
 *.env.*
 
-# Editor/IDE
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
 
-# Build artifacts
-dist/
-build/
-target/
+# Logs
+*.log
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-venv/
-.venv/
-.env
 
-# Database
-*.sqlite
-*.db
+# Temporary files
+*.tmp
+*.swp
+*.swo
 
 # OS
 .DS_Store
@@ -45,7 +39,8 @@ coverage/
 htmlcov/
 .coverage
 
-# Temporary files
-*.tmp
-*~
+# Cache
+.mypy_cache/
+.pytest_cache/
+.cache/
 ```
