@@ -1,0 +1,17 @@
+{
+  "name": "Tag",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0442\u0435\u0433\u0430"
+    },
+    "color": {
+      "type": "string",
+      "description": "\u0426\u0432\u0435\u0442 \u0442\u0435\u0433\u0430"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
