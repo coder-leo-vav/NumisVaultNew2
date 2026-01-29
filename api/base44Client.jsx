@@ -326,7 +326,7 @@ export const base44 = {
     Core: {
       UploadFile: async ({ file }) => {
         // Возвращаем заглушку для локальной разработки
-        return { file_url: 'https://via.placeholder.com/300' };
+        return { file_url: 'https://placeholder.apptor.studio/300/30/product1.png' };
       },
       InvokeLLM: async ({ prompt, file_urls, response_json_schema }) => {
         // Возвращаем заглушку для локальной разработки
